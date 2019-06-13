@@ -23,7 +23,12 @@ async function getMaxTxs() {
 
 async function getNonce(pubkeyX, pubkeyY) {
   var res = await knex.select('nonce').from('accounts').where({ pubkeyX, pubkeyY}).first();
-  return res;
+  return res['nonce'];
+}
+
+async function getIndex(pubkeyX, pubkeyY) {
+  var res = await knex.select('index').from('accounts').where({ pubkeyX, pubkeyY}).first();
+  return res['index'];
 }
 
 // genesis state of co-ordinator 
@@ -51,7 +56,7 @@ async function getAllAccounts() {
     leaf['token_type'] = results[i].tokenType;
     accounts.push(leaf)
   }
-  console.log(accounts)
+  // console.log(accounts)
   return accounts
 }
 
@@ -59,6 +64,7 @@ export default {
   getTxCount,
   getMaxTxs,
   getNonce,
+  getIndex,
   getAllAccounts,
   AddGenesisState
 }

@@ -42,7 +42,7 @@ export default class Transaction {
     this.R1 = signature.R8[0]
     this.R2 = signature.R8[1]
     this.S = signature.S
-    return signature
+    return [hash, signature]
   }
 
   serialise() {
